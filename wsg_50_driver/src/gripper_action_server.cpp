@@ -82,10 +82,12 @@ void GripperActionServer::doWork()
     {
       if (this->action_state.ignore_axis_blocked && result.status.return_code == E_AXIS_BLOCKED) {
         // special case in that pre-positioning (move) is used as workaround to pickup parts with an unknown width
-        // the gripper goes into an error state even when stop_on_block is false, therefore we acknowledge the error an wait until the reported values are nominal again
+        // the gripper goes into an error state even when stop_on_block is false, therefore we acknowledge the error and wait until the reported values are nominal again
         printf("[GripperActionServer::doWork] received E_AXIS_BLOCKED, but stop_on_block was false -> will acknowledge gripper error\n");
         try {
-          this->gripper_com.acknowledge_error();
+
+          // manuelli (remove this acknowledge erorr seems to allow forces to be applied when doing MOVE mode)
+          // this->gripper_com.acknowledge_error();
           // it takes a while for the gripper to report the correct force, therefore we wait until we received three updates of the force values
           this->gripper_com.awaitUpdateForMessage((unsigned char)WellKnownMessageId::FORCE_VALUES, nullptr, 3);
           this->gripper_com.awaitUpdateForMessage((unsigned char)WellKnownMessageId::GRIPPING_STATE);

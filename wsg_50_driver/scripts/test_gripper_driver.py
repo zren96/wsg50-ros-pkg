@@ -18,7 +18,7 @@ def open_gripper():
     goal.command.command_id = wsg_50_common.msg.Command.MOVE
     goal.command.width = 0.1
     goal.command.speed = 0.1
-    goal.command.force = 40
+    goal.command.force = 100
     goal.command.stop_on_block = False
 
 
@@ -40,8 +40,10 @@ def close_gripper():
     goal.command.command_id = wsg_50_common.msg.Command.MOVE
     goal.command.width = 0.0
     goal.command.speed = 0.1
-    goal.command.force = 40
+    goal.command.force = 80
     goal.command.stop_on_block = False
+
+    print goal
 
 
     client.send_goal(goal)
