@@ -1,3 +1,4 @@
+time stamp
 int32 grasping_state_id
 string grasping_state
 int32 return_code
@@ -6,7 +7,7 @@ float64 width           # in m
 float64 current_speed   # in m/s
 float64 current_force   # in N
 float64 grasping_force  # in N
-float64 acceleration    # in m/s²
+float64 acceleration    # in m/s^2
 
 # grasping state IDs
 int32 IDLE = 0
